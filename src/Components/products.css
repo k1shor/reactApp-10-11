@@ -1,0 +1,15 @@
+.card-image{
+    height: 150px;
+    overflow: hidden;
+}
+
+.card-image img{
+    height: 100%;
+    transition: 2s;
+
+}
+
+.card-image img:hover{
+    transform: scale(1.5);
+    /* cursor:grabbing; */
+}
