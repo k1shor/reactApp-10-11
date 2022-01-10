@@ -5,6 +5,7 @@ import First from "./Pages/First";
 import Second from "./Pages/Second"
 import App from "./App"
 import Home from './Pages/Home';
+import Signin from './Pages/Signin';
 
 const MyRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const MyRoutes = () => {
 
 
                 <Route path="/" element={<Home/>} />
+                <Route path="/signin" element={<Signin/>} />
             </Routes>
 
         </Router>

@@ -1,21 +1,30 @@
-
-
+*{
+    margin:0;
+    box-sizing: border-box;
+}
 .slick-next:before, .slick-prev:before{
     color: blue !important;
 }
-
 .slick-img-container{
     width: 100px;
     height: 100px;
 }
-
 .slick-img-container img{
     height: 100%;
     width: 100%;
 }
-
 .slick-slide{
-    padding: 0 50px;
-
+    padding: 0 50px !important;
+}
+.slick-prev{
+    left: 0!important;
+    z-index: 2;
+}
+.slick-next{
+    right: 0 !important;
 }
 
+
+.slick_container{
+    height: 150px !important;
+}

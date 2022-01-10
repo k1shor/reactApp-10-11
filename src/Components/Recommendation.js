@@ -51,7 +51,7 @@ export default class Recommendation extends Component {
             ]
         };
         return (
-            <div className="container mx-auto mt-5">
+            <div className="container slick_container mx-auto mt-5">
 
                 <Slider {...settings}>
                     <div>

@@ -17,7 +17,7 @@ const Navbar = () => {
                 </div>
                 <div className='col-md-3 d-flex justify-content-evenly'>
                     <i className="bi bi-person-plus-fill fs-3 text-warning"></i>
-                    <i className="bi bi-box-arrow-in-right fs-3 text-warning"></i>
+                    <Link to='/signin'><i className="bi bi-box-arrow-in-right fs-3 text-warning"></i></Link>
                     <i className="bi bi-cart fs-3 text-warning"></i>
                 </div>
             </div>

@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 const recommendation2 = () => {
     var settings = {
         dots: true,
@@ -37,8 +35,6 @@ const recommendation2 = () => {
             }
         ]
     };
-
-
     return (
         <div>
             <Slider {...settings}>
