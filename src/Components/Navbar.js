@@ -7,7 +7,7 @@ const Navbar = () => {
         <>
             <div className='row py-2 bg-dark'>
                 <div className='col-md-3'>
-                    <Link className="navbar-brand fs-3 text-warning text-end" to="#" >My Store</Link>
+                    <Link className="navbar-brand fs-3 text-warning text-end" to="/" >My Store</Link>
                 </div>
                 <div className='col-md-6'>
                     <form className="d-flex">
@@ -16,9 +16,9 @@ const Navbar = () => {
                     </form>
                 </div>
                 <div className='col-md-3 d-flex justify-content-evenly'>
-                    <i className="bi bi-person-plus-fill fs-3 text-warning"></i>
+                    <Link to='/signup'><i className="bi bi-person-plus-fill fs-3 text-warning"></i></Link>
                     <Link to='/signin'><i className="bi bi-box-arrow-in-right fs-3 text-warning"></i></Link>
-                    <i className="bi bi-cart fs-3 text-warning"></i>
+                    <Link to ='/cart'><i className="bi bi-cart fs-3 text-warning"></i></Link>
                 </div>
             </div>
             <nav className="navbar navbar-expand-lg navbar-light bg-secondary fs-5 ">
@@ -30,7 +30,7 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item me-5">
-                                <Link className="nav-link active" aria-current="page" to="#">Home</Link>
+                                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item me-5">
                                 <Link className="nav-link" to="#">Deals</Link>

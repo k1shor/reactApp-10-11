@@ -7,7 +7,7 @@ const Signin = () => {
     return (
         <>
             <Navbar />
-            <div className='container-sm w-50 mx-auto mt-5'>
+            <div className='container-sm w-50  mx-auto my-5 shadow-lg p-5'>
                 <main className="form-signin">
                     <form>
                         <div className='text-center'>

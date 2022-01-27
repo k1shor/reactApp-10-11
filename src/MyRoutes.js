@@ -6,6 +6,11 @@ import Second from "./Pages/Second"
 import App from "./App"
 import Home from './Pages/Home';
 import Signin from './Pages/Signin';
+import Signup from './Pages/Signup';
+import Cart from './Pages/Cart'
+import Data from './hooks/Data';
+import FetchData from './hooks/FetchData';
+import Main from './hooks/Main';
 
 const MyRoutes = () => {
     return (
@@ -18,6 +23,14 @@ const MyRoutes = () => {
 
                 <Route path="/" element={<Home/>} />
                 <Route path="/signin" element={<Signin/>} />
+                <Route path='/signup' element={<Signup/>} />
+                <Route path='/cart' element={<Cart/>}/>
+
+
+                {/* hooks */}
+                <Route path='/showdata' element={<Data/>}/>
+                <Route path='/fetchdata' element={<FetchData/>}/>
+                <Route path="/text" element={<Main/>}/>
             </Routes>
 
         </Router>
