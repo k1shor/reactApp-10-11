@@ -11,6 +11,7 @@ import Cart from './Pages/Cart'
 import Data from './hooks/Data';
 import FetchData from './hooks/FetchData';
 import Main from './hooks/Main';
+import Confirm from './Pages/Confirm';
 
 const MyRoutes = () => {
     return (
@@ -25,6 +26,7 @@ const MyRoutes = () => {
                 <Route path="/signin" element={<Signin/>} />
                 <Route path='/signup' element={<Signup/>} />
                 <Route path='/cart' element={<Cart/>}/>
+                <Route path='/email/confirmation/:token' element={<Confirm/>}/>
 
 
                 {/* hooks */}
