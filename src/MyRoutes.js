@@ -12,6 +12,8 @@ import Data from './hooks/Data';
 import FetchData from './hooks/FetchData';
 import Main from './hooks/Main';
 import Confirm from './Pages/Confirm';
+import AdminDashboard from './Pages/AdminDashboard';
+import AdminRoute from './Components/Routes/AdminRoute';
 
 const MyRoutes = () => {
     return (
@@ -27,6 +29,8 @@ const MyRoutes = () => {
                 <Route path='/signup' element={<Signup/>} />
                 <Route path='/cart' element={<Cart/>}/>
                 <Route path='/email/confirmation/:token' element={<Confirm/>}/>
+
+                <AdminRoute path='/admin/dashboard' element={<AdminDashboard/>}/>
 
 
                 {/* hooks */}

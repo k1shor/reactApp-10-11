@@ -1,10 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { isAuthenticated, signout } from './auth'
+
 import './navbar.css'
 
 const Navbar = () => {
+    const { user } = isAuthenticated();
+    // const [redirect, setRedirect] = useState(false)
+    // const navigate = useNavigate()
+
+    const signOut = () => {
+        signout()
+        .then(data=>{
+            if(data.error){
+                return console.log(data.error)
+            }
+            else{
+                // setRedirect(true)
+                console.log("signed out")
+            }
+        })
+        .catch(error=>console.log(error))
+        // signout(() => setRedirect(true))
+    }
+
+    // const redirectToPage = () => {
+    //     if (redirect) {
+    //         navigate('/')
+    //     }
+    // }
+
     return (
         <>
+        {/* {redirectToPage} */}
             <div className='row py-2 bg-dark'>
                 <div className='col-md-3'>
                     <Link className="navbar-brand fs-3 text-warning text-end" to="/" >My Store</Link>
@@ -16,9 +44,33 @@ const Navbar = () => {
                     </form>
                 </div>
                 <div className='col-md-3 d-flex justify-content-evenly'>
-                    <Link to='/signup'><i className="bi bi-person-plus-fill fs-3 text-warning"></i></Link>
-                    <Link to='/signin'><i className="bi bi-box-arrow-in-right fs-3 text-warning"></i></Link>
-                    <Link to ='/cart'><i className="bi bi-cart fs-3 text-warning"></i></Link>
+                    <Link to='/cart'><i className="bi bi-cart fs-3 text-warning"></i></Link>
+                    {
+                        (!user) &&
+                        <>
+                            <Link to='/signin'><i className="bi bi-box-arrow-in-right fs-3 text-warning"></i></Link>
+                            <Link to='/signup'><i className="bi bi-person-plus-fill fs-3 text-warning"></i></Link>
+                        </>
+                    }
+
+                    {
+                        (user) && (user.role === 1) &&
+                        <>
+                            <Link to='/admin/dashboard'><i className="bi bi-border fs-3 text-warning"></i></Link>
+                            <Link to="/" onClick={signOut}><i className="bi bi-box-arrow-left fs-3 text-warning"></i></Link>
+                        </>
+
+                    }
+                    {
+                        (user) && (user.role === 0) &&
+                        <>
+                            <Link to='/user/profile'><i className="bi bi-person-circle fs-3 text-warning"></i>
+                            </Link>
+                            <Link to="/" onClick={signOut}><i className="bi bi-box-arrow-left fs-3 text-warning"></i></Link>
+                        </>
+
+                    }
+
                 </div>
             </div>
             <nav className="navbar navbar-expand-lg navbar-light bg-secondary fs-5 ">
@@ -33,13 +85,13 @@ const Navbar = () => {
                                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item me-5">
-                                <Link className="nav-link" to="#">Deals</Link>
+                                <Link className="nav-link" to="/deals">Deals</Link>
                             </li>
                             <li className="nav-item me-5">
-                                <Link className="nav-link" to="#">Customer Service</Link>
+                                <Link className="nav-link" to="/customerservice">Customer Service</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="#">Contact</Link>
+                                <Link className="nav-link" to="/contact">Contact</Link>
                             </li>
                             {/* <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
