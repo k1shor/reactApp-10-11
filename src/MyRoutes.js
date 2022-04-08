@@ -14,6 +14,8 @@ import Main from './hooks/Main';
 import Confirm from './Pages/Confirm';
 import AdminDashboard from './Pages/AdminDashboard';
 import AdminRoute from './Components/Routes/AdminRoute';
+import PrivateRoute from './Components/Routes/PrivateRoute';
+import UserDashboard from './Pages/UserDashboard';
 
 const MyRoutes = () => {
     return (
@@ -24,19 +26,30 @@ const MyRoutes = () => {
                 <Route path='/' element={<App/>}/> */}
 
 
-                <Route path="/" element={<Home/>} />
-                <Route path="/signin" element={<Signin/>} />
-                <Route path='/signup' element={<Signup/>} />
-                <Route path='/cart' element={<Cart/>}/>
-                <Route path='/email/confirmation/:token' element={<Confirm/>}/>
+                <Route path="/" element={<Home />} />
+                <Route path="/signin" element={<Signin />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/email/confirmation/:token' element={<Confirm />} />
 
-                <AdminRoute path='/admin/dashboard' element={<AdminDashboard/>}/>
+                <Route path='/' element={<AdminRoute />}>
+                    <Route path='/admin/dashboard' element={<AdminDashboard />} />
+
+
+                </Route>
+
+                <Route path='/' element={<PrivateRoute />}>
+                    <Route path='/user/profile' element={<UserDashboard />} />
+                    <Route path='/cart' element={<Cart />} />
+
+
+                </Route>
+
 
 
                 {/* hooks */}
-                <Route path='/showdata' element={<Data/>}/>
-                <Route path='/fetchdata' element={<FetchData/>}/>
-                <Route path="/text" element={<Main/>}/>
+                <Route path='/showdata' element={<Data />} />
+                <Route path='/fetchdata' element={<FetchData />} />
+                <Route path="/text" element={<Main />} />
             </Routes>
 
         </Router>
