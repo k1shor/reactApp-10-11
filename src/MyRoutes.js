@@ -16,6 +16,7 @@ import AdminDashboard from './Pages/AdminDashboard';
 import AdminRoute from './Components/Routes/AdminRoute';
 import PrivateRoute from './Components/Routes/PrivateRoute';
 import UserDashboard from './Pages/UserDashboard';
+import Category from './Components/category/Category';
 
 const MyRoutes = () => {
     return (
@@ -33,6 +34,7 @@ const MyRoutes = () => {
 
                 <Route path='/' element={<AdminRoute />}>
                     <Route path='/admin/dashboard' element={<AdminDashboard />} />
+                    <Route path='/admin/category' element={<Category/>}/>
 
 
                 </Route>
