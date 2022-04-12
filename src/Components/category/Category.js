@@ -3,11 +3,14 @@ import { isAuthenticated } from '../auth'
 import Footer from '../Footer'
 import Navbar from '../Navbar'
 import AdminSidebar from '../AdminSidebar'
-import { getAllCategories } from './categoryApi'
+import { addCategory, getAllCategories } from './categoryApi'
 
 const Category = () => {
     const { user } = isAuthenticated()
 
+    const [category_name, setCategoryName] = useState('')
+    const [error,setError] = useState('')
+    const [success, setSuccess] = useState('')
     const [categories, setCategories] = useState([])
 
     useEffect(()=>{
@@ -24,6 +27,34 @@ const Category = () => {
         .catch(err=>console.log(err))
     },[])
 
+    const addcategory = () =>{
+        addCategory({category_name})
+        .then(data=>{
+            if(data.error){
+                setError(data.error)
+            }
+            else{
+                setSuccess('Category added successfully')
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    // to show error
+    const showError = () => {
+        if(error){
+            return <div className='alert alert-danger'>{error}</div>
+        }
+    }
+
+    // to show success
+    const showSuccess = () =>{
+        if(success){
+            return  <div className='alert alert-success'>{success}</div>
+        }     
+    }
+
+
     return (
         <>
             <Navbar />
@@ -35,7 +66,9 @@ const Category = () => {
                     <div className='col-md-9'>
                         <h3 className='my-3 text-center'>Categories</h3>
                         <div className='container'>
-                            <table className='table'>
+                            {showError()}
+                            {showSuccess()}
+                            <table className='table text-center'>
                                 <thead>
                                     <tr>
                                         <td>S.No.</td>
@@ -60,6 +93,15 @@ const Category = () => {
                                         ) 
                                         
                                     }
+
+                                    <tr>
+                                        <td colSpan={2}><input className='form-control' type={'text'} placeholder='input category name' onChange={(e)=>{
+                                            setCategoryName(e.target.value)
+                                        }}/></td>
+                                        <td><button className='btn btn-warning' onClick={()=>{
+                                            addcategory()
+                                        }}>Add</button></td>
+                                    </tr>
                                 </tbody>
                                 
                             </table>
