@@ -3,15 +3,19 @@ import { isAuthenticated } from '../auth'
 import Footer from '../Footer'
 import Navbar from '../Navbar'
 import AdminSidebar from '../AdminSidebar'
-import { addCategory, getAllCategories } from './categoryApi'
+import { addCategory, deleteCategory, getAllCategories } from './categoryApi'
+import { useNavigate } from 'react-router-dom'
 
 const Category = () => {
+    const {token} = isAuthenticated()
     const { user } = isAuthenticated()
 
     const [category_name, setCategoryName] = useState('')
     const [error,setError] = useState('')
     const [success, setSuccess] = useState('')
     const [categories, setCategories] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(()=>{
         getAllCategories()
@@ -25,16 +29,39 @@ const Category = () => {
             }
         })
         .catch(err=>console.log(err))
-    },[])
+    },[success])
 
     const addcategory = () =>{
-        addCategory({category_name})
+        setSuccess('')
+        // e.preventDefault()
+        addCategory({category_name},token)
         .then(data=>{
             if(data.error){
+                setSuccess('')
                 setError(data.error)
             }
             else{
+                setError('')
                 setSuccess('Category added successfully')
+                setCategoryName('')
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    const deletecategory = (id) =>{
+        setSuccess('')
+        // e.preventDefault()
+        deleteCategory(id, token)
+        .then(data=>{
+            if(data.error){
+                setSuccess('')
+                setError(data.error)
+            }
+            else{
+                setError('')
+                setSuccess('Category Deleted successfully')
+                
             }
         })
         .catch(err=>console.log(err))
@@ -85,8 +112,8 @@ const Category = () => {
                                             {/* console.log(item.category_name) */}
                                             <td>{item.category_name}</td>
                                             <td>
-                                                <button className='btn btn-warning'>EDIT</button>
-                                                <button className='btn btn-danger'>DELETE</button>
+                                                <button className='btn btn-warning' onClick={()=>navigate(`/admin/categoryupdate/${item._id}`)}>EDIT</button>
+                                                <button className='btn btn-danger' onClick={()=>deletecategory(item._id)}>DELETE</button>
                                             </td>
                                         </tr>
                                         )
@@ -97,10 +124,10 @@ const Category = () => {
                                     <tr>
                                         <td colSpan={2}><input className='form-control' type={'text'} placeholder='input category name' onChange={(e)=>{
                                             setCategoryName(e.target.value)
-                                        }}/></td>
-                                        <td><button className='btn btn-warning' onClick={()=>{
-                                            addcategory()
-                                        }}>Add</button></td>
+                                        }} value={category_name}/></td>
+                                        <td><button className='btn btn-warning' onClick={
+                                            addcategory
+                                        }>Add</button></td>
                                     </tr>
                                 </tbody>
                                 

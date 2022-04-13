@@ -15,13 +15,13 @@ const AdminSidebar = () => {
             <hr />
             <ul className="nav nav-pills flex-column mb-auto">
               <li className="nav-item">
-                <a href="#" className="nav-link active" aria-current="page">
+                <a href="/" className="nav-link active" aria-current="page">
 
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="nav-link text-white">
+                <a href="/admin/category" className="nav-link text-white">
 
                   Category
                 </a>
