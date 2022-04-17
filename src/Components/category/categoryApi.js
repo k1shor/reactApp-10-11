@@ -48,3 +48,18 @@ export const findCategory = (id) =>{
     .then(res=>res.json())
     .catch(err=>console.log(err))
 }
+
+// to update category
+export const updateCategory = (id, category, token) =>{
+    return fetch(`http://localhost:5000/api/updateCategory/${id}`,{
+        method:"PUT",
+        headers:{
+            Accept:"application/json",
+            "Content-Type":"application/json",
+            Authorization:`Bearer ${token}`
+        },
+        body: JSON.stringify(category)
+    })
+    .then(res=>res.json())
+    .catch(err=>console.log(err))
+}

@@ -44,12 +44,13 @@ const Navbar = () => {
                     </form>
                 </div>
                 <div className='col-md-3 d-flex justify-content-evenly'>
-                    <Link to='/cart'><i className="bi bi-cart fs-3 text-warning"></i></Link>
+                    
                     {
                         (!user) &&
                         <>
                             <Link to='/signin'><i className="bi bi-box-arrow-in-right fs-3 text-warning"></i></Link>
                             <Link to='/signup'><i className="bi bi-person-plus-fill fs-3 text-warning"></i></Link>
+                            <Link to='/cart'><i className="bi bi-cart fs-3 text-warning"></i></Link>
                         </>
                     }
 
@@ -67,6 +68,7 @@ const Navbar = () => {
                             <Link to='/user/profile'><i className="bi bi-person-circle fs-3 text-warning"></i>
                             </Link>
                             <Link to="/" onClick={signOut}><i className="bi bi-box-arrow-left fs-3 text-warning"></i></Link>
+                            <Link to='/cart'><i className="bi bi-cart fs-3 text-warning"></i></Link>
                         </>
 
                     }
