@@ -50,7 +50,7 @@ export const findCategory = (id) =>{
 }
 
 // to update category
-export const updateCategory = (id, category, token) =>{
+export const updateCategory = (id, category_name, token) =>{
     return fetch(`http://localhost:5000/api/updateCategory/${id}`,{
         method:"PUT",
         headers:{
@@ -58,7 +58,8 @@ export const updateCategory = (id, category, token) =>{
             "Content-Type":"application/json",
             Authorization:`Bearer ${token}`
         },
-        body: JSON.stringify(category)
+        // body: JSON.stringify(category_name)
+        body: JSON.stringify({category_name})
     })
     .then(res=>res.json())
     .catch(err=>console.log(err))
