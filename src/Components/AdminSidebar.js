@@ -27,9 +27,13 @@ const AdminSidebar = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="nav-link text-white">
-
+                <a href="/admin/products" className="nav-link text-white">
                   Products
+                </a>
+              </li>
+              <li>
+                <a href="/admin/product/add" className="nav-link text-white">
+                  Add Product
                 </a>
               </li>
               <li>

@@ -35,7 +35,7 @@ const CategoryUpdate = () => {
         e.preventDefault()
         // const category_name = new_category
         // updateCategory(params.id,{category_name},token)
-        setSuccess(false)
+        // setSuccess(false)
         updateCategory(params.id, new_category, token)
 
             .then(data => {

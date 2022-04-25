@@ -18,6 +18,8 @@ import PrivateRoute from './Components/Routes/PrivateRoute';
 import UserDashboard from './Pages/UserDashboard';
 import Category from './Components/category/Category';
 import CategoryUpdate from './Components/category/CategoryUpdate';
+import Addproduct from './Components/product/Addproduct';
+import Products_in_Admin_page from './Components/product/Products_in_Admin_page';
 
 const MyRoutes = () => {
     return (
@@ -37,6 +39,9 @@ const MyRoutes = () => {
                     <Route path='/admin/dashboard' element={<AdminDashboard />} />
                     <Route path='/admin/category' element={<Category/>}/>
                     <Route path='/admin/categoryupdate/:id' element={<CategoryUpdate/>}/>
+                    <Route path='/admin/product/add' element={<Addproduct/>}/>
+                    <Route path='/admin/products' element={<Products_in_Admin_page/>}/>
+
 
 
                 </Route>
