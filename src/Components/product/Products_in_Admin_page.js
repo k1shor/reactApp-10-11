@@ -8,38 +8,41 @@ import { getAllProducts, getSortedProducts } from './productAPI'
 
 const Products_in_Admin_page = () => {
     const [products, setProducts] = useState([])
-    const [allproducts,setAllProducts] = useState([])
-    const [limit,setLimit] = useState(14)
+    // const [allproducts,setAllProducts] = useState([])
+    const [limit,setLimit] = useState(8)
 
-    const [sortBy,setSortBy] = useState('product_name')
-    const [order,setOrder] = useState(1)
+    // const [sortBy,setSortBy] = useState('product_name')
+    // const [order,setOrder] = useState(1)
     
 
     useEffect(() => {
-        // getAllProducts()
-        getSortedProducts(sortBy,order)
+        getAllProducts()
+        // getSortedProducts(sortBy,order)
             .then(data => {
                 if (data.error) {
                     console.log(data.error)
                 }
                 else {
-                    setAllProducts(data)
+                    // setAllProducts(data)
+                    setProducts(data)
                 }
             })
             .catch(error => console.log(error))
 
-        getSortedProducts(sortBy,order,limit)
-            .then(data => {
-                if (data.error) {
-                    console.log(data.error)
-                }
-                else {
-                    setProducts(data)
-                    console.log(data)
-                }
-            })
-            .catch(error => console.log(error))
-    }, [sortBy,order,limit])
+        // getSortedProducts(sortBy,order,limit)
+        //     .then(data => {
+        //         if (data.error) {
+        //             console.log(data.error)
+        //         }
+        //         else {
+        //             setProducts(data)
+        //             console.log(data)
+        //         }
+        //     })
+        //     .catch(error => console.log(error))
+    // }, [sortBy,order,limit])
+    }, [])
+
 
     return (
         <>
@@ -53,14 +56,14 @@ const Products_in_Admin_page = () => {
                     <div className='col-md-9'>
                         <h3 className='my-3 text-center'>Products</h3>
 
-                        <select onChange={(e)=>setSortBy(e.target.value)}>
+                        {/* <select onChange={(e)=>setSortBy(e.target.value)}>
                             <option value='product_name'>Name</option>
                             <option value='product_price'>Price</option>
                         </select>
                         <select onChange={e=>setOrder(e.target.value)}>
                             <option value='1'>Ascending</option>
                             <option value='-1'>Descending</option>
-                        </select>
+                        </select> */}
                         <hr />
                         <table className='table table-bordered text-center'>
                             <thead>
@@ -93,7 +96,8 @@ const Products_in_Admin_page = () => {
                                 }
                                 <tr>
 {
-    limit < allproducts.length ?
+    // limit < allproducts.length ?
+    limit < products.length ?
     <td colSpan={5}><button className='btn btn-warning' onClick={()=>setLimit(limit+4)}>Load more</button></td>
      :
     <td colSpan={5}><h5>All Items Loaded</h5></td>

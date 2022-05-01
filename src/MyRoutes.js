@@ -20,10 +20,15 @@ import Category from './Components/category/Category';
 import CategoryUpdate from './Components/category/CategoryUpdate';
 import Addproduct from './Components/product/Addproduct';
 import Products_in_Admin_page from './Components/product/Products_in_Admin_page';
+import Footer from './Components/Footer';
+import Navbar from './Components/Navbar';
+import Product_Details from './Components/product/Product_Details';
 
 const MyRoutes = () => {
     return (
+    
         <Router>
+        <Navbar/>
             <Routes>
                 {/* <Route path='/f' element={<First />} />
                 <Route path="/s" element={<Second />} />
@@ -34,6 +39,7 @@ const MyRoutes = () => {
                 <Route path="/signin" element={<Signin />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/email/confirmation/:token' element={<Confirm />} />
+                <Route path= '/product/details/:id' element={<Product_Details/>}/>
 
                 <Route path='/' element={<AdminRoute />}>
                     <Route path='/admin/dashboard' element={<AdminDashboard />} />
@@ -61,7 +67,9 @@ const MyRoutes = () => {
                 <Route path="/text" element={<Main />} />
             </Routes>
 
+        <Footer/>
         </Router>
+        
     )
 }
 

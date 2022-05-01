@@ -36,3 +36,12 @@ export const getSortedProducts =(sortBy,order,limit) => {
     .then(res=>res.json())
     .catch(err=>console.log(err))
 }
+
+// to get product details
+export const getProductDetails = (id) => {
+    return fetch(`${API}/productdetail/${id}`,{
+        method:"GET"
+    })
+    .then(res=>res.json())
+    .catch(err=>console.log(err))
+}
