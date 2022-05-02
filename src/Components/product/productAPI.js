@@ -45,3 +45,12 @@ export const getProductDetails = (id) => {
     .then(res=>res.json())
     .catch(err=>console.log(err))
 }
+
+// to get related products
+export const getRelatedProducts = (id) => {
+    return fetch(`${API}/getrelatedProducts/${id}`,{
+        method:"GET"
+    })
+    .then(res=>res.json())
+    .catch(err=>console.log(err))
+}

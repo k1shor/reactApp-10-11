@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductDetails } from './productAPI'
 import { isAuthenticated } from '../auth'
+import RelatedProducts from '../RelatedProducts'
 
 
 
@@ -48,7 +49,9 @@ const Product_Details = () => {
                         }
                     </div>
                 </div>
+                {/* {console.log(product._id)} */}
             </div>
+                <RelatedProducts id={product._id}/>
         </>
     )
 }

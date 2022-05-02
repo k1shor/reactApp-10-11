@@ -86,8 +86,7 @@ const Addproduct = () => {
     }
         return (
             <>
-                <Navbar />
-
+                
                 <div className='container-fluid custom-row'>
                     <div className='row '>
                         <div className='col-md-3'>
@@ -142,7 +141,6 @@ const Addproduct = () => {
                     </div>
                 </div>
 
-                <Footer />
             </>
         )
     }
