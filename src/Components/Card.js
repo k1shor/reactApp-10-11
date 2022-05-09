@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Card = ({props}) => {
     return (
         <>
-{console.log(props)}
+{/* {console.log(props)} */}
             <div className="col">
                 <div className="card shadow-lg mb-5">
                     <div className='card-image'>

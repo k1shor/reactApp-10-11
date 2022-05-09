@@ -51,7 +51,7 @@ const Product_Details = () => {
                 </div>
                 {/* {console.log(product._id)} */}
             </div>
-                <RelatedProducts id={product._id}/>
+                <RelatedProducts props={product._id}/>
         </>
     )
 }

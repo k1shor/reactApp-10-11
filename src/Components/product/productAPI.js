@@ -54,3 +54,19 @@ export const getRelatedProducts = (id) => {
     .then(res=>res.json())
     .catch(err=>console.log(err))
 }
+
+// to get filtered products
+export const getFilteredProducts = (sortBy, order, limit, skip, {filters})=>{
+    let data = {skip, filters}
+    // console.log(data)
+    return fetch(`${API}/getFilteredProducts`,{
+        method:"POST",
+        headers:{
+            Accept:"application/json",
+            "Content-type":"application/json"
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response=>response.json())
+    .catch(error=>console.log(error))
+}

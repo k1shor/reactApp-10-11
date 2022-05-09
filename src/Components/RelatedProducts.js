@@ -11,6 +11,7 @@ const RelatedProducts = () => {
     const id = params.id
 
     useEffect(() => {
+        // console.log(props)
         getRelatedProducts(id)
             .then(data => {
                 if (data.error) {

@@ -23,6 +23,7 @@ import Products_in_Admin_page from './Components/product/Products_in_Admin_page'
 import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 import Product_Details from './Components/product/Product_Details';
+import Deals from './Pages/Deals';
 
 const MyRoutes = () => {
     return (
@@ -40,6 +41,8 @@ const MyRoutes = () => {
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/email/confirmation/:token' element={<Confirm />} />
                 <Route path= '/product/details/:id' element={<Product_Details/>}/>
+
+                <Route path='/deals' element={<Deals/>}/>
 
                 <Route path='/' element={<AdminRoute />}>
                     <Route path='/admin/dashboard' element={<AdminDashboard />} />
