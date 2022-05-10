@@ -88,6 +88,8 @@ const Signin = () => {
                             </label>
                         </div>
                         <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={clickSubmit}>Sign in</button>
+                        <Link to = '/forgetpassword'>Forget Password.</Link><br/>
+                        
                         Do not have an account? <Link to='/signup'>Register</Link>
 
                         <p className="mt-5 mb-3 text-muted">&copy; 2017 – 2021</p>

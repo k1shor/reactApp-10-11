@@ -60,3 +60,19 @@ export const signout = (next) => {
         .then(res => console.log('signout', res))
         .catch(error => console.log(error))
 }
+
+//forget password
+export const forgetpassword = (email) => {
+    return fetch(`${API}/forgetpassword`,{
+        method:"POST",
+        headers:{
+            Accept:"application/json",
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({email})
+    })
+    .then(res=>res.json())
+    .catch(error=>console.log(error))
+}
+
+// {"email":"abc@fmil.com"}

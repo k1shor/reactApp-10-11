@@ -24,6 +24,7 @@ import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 import Product_Details from './Components/product/Product_Details';
 import Deals from './Pages/Deals';
+import ForgetPassword from './Pages/ForgetPassword';
 
 const MyRoutes = () => {
     return (
@@ -43,6 +44,8 @@ const MyRoutes = () => {
                 <Route path= '/product/details/:id' element={<Product_Details/>}/>
 
                 <Route path='/deals' element={<Deals/>}/>
+
+                <Route path='/forgetpassword' element={<ForgetPassword/>}/>
 
                 <Route path='/' element={<AdminRoute />}>
                     <Route path='/admin/dashboard' element={<AdminDashboard />} />
