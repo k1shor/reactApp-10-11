@@ -76,3 +76,18 @@ export const forgetpassword = (email) => {
 }
 
 // {"email":"abc@fmil.com"}
+
+//reset password
+export const resetpassword = (token, email, new_password) =>{
+    const data = {email, new_password}
+    return fetch(`${API}/resetpassword/${token}`,{
+        method:"POST",
+        headers:{
+            Accept:"application/json",
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+    })
+    .then(res=>res.json())
+    .catch(error=>console.log(error))
+}

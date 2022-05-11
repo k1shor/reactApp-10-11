@@ -62,6 +62,7 @@ const Deals = () => {
       let priceValue = handlePrice(filters)
       newFilter.filters[filterBy] = priceValue
     }
+    // console.log(newFilter)
     setMyFilters(newFilter)
   }
 

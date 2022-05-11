@@ -25,6 +25,7 @@ import Navbar from './Components/Navbar';
 import Product_Details from './Components/product/Product_Details';
 import Deals from './Pages/Deals';
 import ForgetPassword from './Pages/ForgetPassword';
+import ResetPassword from './Pages/ResetPassword';
 
 const MyRoutes = () => {
     return (
@@ -46,6 +47,7 @@ const MyRoutes = () => {
                 <Route path='/deals' element={<Deals/>}/>
 
                 <Route path='/forgetpassword' element={<ForgetPassword/>}/>
+                <Route path='/resetpassword/:token' element={<ResetPassword/>}/>
 
                 <Route path='/' element={<AdminRoute />}>
                     <Route path='/admin/dashboard' element={<AdminDashboard />} />

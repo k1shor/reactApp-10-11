@@ -4,7 +4,7 @@ import { prices } from './Price'
 const Radio = ({passing_handleFilters}) => {
 
     const handleChange = e =>{
-        passing_handleFilters(e.target.value, 'price')
+        passing_handleFilters(e.target.value, 'prices')
     }
 
     return (
