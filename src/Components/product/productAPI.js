@@ -58,12 +58,12 @@ export const getRelatedProducts = (id) => {
 // to get filtered products
 export const getFilteredProducts = (sortBy, order, limit, skip, {filters})=>{
     let data = {skip, filters}
-    console.log(data)
-    return fetch(`${API}/getFilteredProducts`,{
+    // console.log(limit)
+    return fetch(`${API}/getFilteredProducts?limit=${limit}`,{
         method:"POST",
         headers:{
             Accept:"application/json",
-            "Content-type":"application/json"
+            "Content-Type":"application/json"
         },
         body:JSON.stringify(data)
     })

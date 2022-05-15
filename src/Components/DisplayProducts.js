@@ -12,10 +12,11 @@ const DisplayProducts = ({products}) => {
                 }
             </div>
             <div className='text-center'>
-                <div className='btn-group'>
+                {/* <div className='btn-group'>
                     <button className='btn btn-warning' onClick={() => setLimit(limit + 4)}>Show more</button>
-                    <button className='btn btn-danger' onClick={() => setLimit(limit - 4)}>Show less</button></div>
-            </div></div>
+                    <button className='btn btn-danger' onClick={() => setLimit(limit - 4)}>Show less</button></div> */}
+            </div>
+            </div>
     )
 }
 

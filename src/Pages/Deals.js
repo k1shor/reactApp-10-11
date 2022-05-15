@@ -70,6 +70,26 @@ const Deals = () => {
   // category -> filterBy
   // 0-999 -> filters
   // price -> filterBy
+
+
+const loadmore =() => {
+  let toskip = skip + limit
+  getFilteredProducts(sortBy, order, limit, toskip, myfilters)
+  .then(data=>{
+    if(data.error){
+      console.log(data.error)
+    }
+    else{
+      setFilteredResult([...filteredResult,...data.filterProduct])
+      setSize(data.size)
+      setSkip(toskip)
+      console.log(data)
+    }
+  })
+  .catch(err=>console.log(err))
+}
+
+
   return (
     <>
       <div className='container-fluid'>
@@ -84,6 +104,9 @@ const Deals = () => {
             <DisplayProducts products={filteredResult}/>
           </div>
         </div>
+        <button className='btn btn-warning' onClick={loadmore}>
+          Load More
+        </button>
       </div>
     </>
   )

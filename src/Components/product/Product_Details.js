@@ -38,14 +38,19 @@ const Product_Details = () => {
                         <h4>Rs. {product.product_price}</h4>
                         <h5>Stock: {<input type='text' className='text-muted' value={product.count_In_Stock} disabled={true} />}</h5>
                         <p>Description: {product.product_description}</p>
-                        {user.role === 0 &&
+                        
+                        {/* {(!user || user.role === 0 ) &&
                             <button className='btn btn-warning'>Add to Cart</button>
-                        }
-                        {user.role === 1 && <>
+                        } */}
+                        {/* {user.role === 0 &&
+                            <button className='btn btn-warning'>Add to Cart</button>
+                        } */}
+                        {(user && user.role === 1) ? <>
                             <button className='btn btn-info'>Edit Product</button>
                             <button className='btn btn-danger'>Remove Product</button>
                         </>
-
+                        :
+                        <button className='btn btn-warning'>Add to Cart</button>
                         }
                     </div>
                 </div>
