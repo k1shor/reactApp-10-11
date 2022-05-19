@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import Second from './Pages/Second';
-// import First from './Pages/First';
 import MyRoutes from './MyRoutes';
+import { Provider } from 'react-redux';
+import store from './reducer/store'
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    
-    <MyRoutes />
-    
+    <Provider store={store}>
+      <MyRoutes />
+    </Provider>
+
 
 
 

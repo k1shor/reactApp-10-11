@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Navbar from '../Navbar'
 import Footer from '../Footer'
 import AdminSidebar from '../AdminSidebar'
@@ -6,6 +6,8 @@ import { getAllCategories } from '../category/categoryApi'
 import { addProduct } from './productAPI'
 
 const Addproduct = () => {
+    const file_ref = useRef()
+    const select_ref = useRef()
     const [categories, setCategories] = useState([])
     const [product, setProduct] = useState({
         product_name: '',
@@ -34,7 +36,7 @@ const Addproduct = () => {
                 }
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [success])
 
     const handleChange = name => event => {
         if (name === 'product_image') {
@@ -49,12 +51,15 @@ const Addproduct = () => {
     }
 
     const clickSubmit = event => {
-        console.log(formData)
+        setError('')
+        setSuccess(false)
+        // console.log(formData)
         event.preventDefault()
         addProduct(formData)
             .then(data => {
                 if (data.error) {
                     setError(data.error)
+                    setSuccess(false)
                 }
                 else {
                     setProduct({
@@ -63,9 +68,13 @@ const Addproduct = () => {
                         product_description: '',
                         product_image: '',
                         count_In_Stock: '',
-                        category: ''
+                        category: '',
+                        // formData: '',
                     })
+                    file_ref.current.value = ''
+                    select_ref.current.value = ''
                     setSuccess(true)
+                    
                 }
             })
             .catch(err => console.log(err))
@@ -111,7 +120,7 @@ const Addproduct = () => {
                                 <input className='form-control mb-2' type={'number'} id='count_In_Stock' onChange={handleChange('count_In_Stock')} value={count_In_Stock} />
 
                                 <label htmlFor='category'>Category</label>
-                                <select id='category' className='form-control mb-2' onChange={handleChange('category')}>
+                                <select id='category' className='form-control mb-2' onChange={handleChange('category')} ref={select_ref}>
                                     <option>Choose category</option>
                                     {
                                         categories.map(category => <option key={category._id} value={category._id}>{category.category_name}</option>)
@@ -120,7 +129,7 @@ const Addproduct = () => {
                                 </select>
 
                                 <label htmlFor='product_image'>Image</label>
-                                <input type={'file'} id='product_image' accept="image/*" className='form-control mb-2' 
+                                <input type={'file'} id='product_image' accept="image/*" className='form-control mb-2' ref={file_ref}
                                 onChange={handleChange('product_image')}
                                 // onChange={event => 
                                 //     setProduct({ ...product, ['product_image']: event.target.files[0] })

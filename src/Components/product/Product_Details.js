@@ -3,10 +3,15 @@ import { useParams } from 'react-router-dom'
 import { getProductDetails } from './productAPI'
 import { isAuthenticated } from '../auth'
 import RelatedProducts from '../RelatedProducts'
+import { addItemsToCart } from '../../reducer/cartActions'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux'
 
 
 
 const Product_Details = () => {
+    const dispatch = useDispatch()
     const params = useParams()
     const [product, setProduct] = useState({})
     const { user } = isAuthenticated()
@@ -26,8 +31,17 @@ const Product_Details = () => {
 
     }, [params])
 
+
+    const addToCart = () => {
+        // console.log(params.id)
+        dispatch(addItemsToCart(params.id,1))
+        toast.success('Item added to cart')
+
+    }
+
     return (
         <>
+        <ToastContainer/>
             <div className='container w-75 my-5 mx-auto shadow-lg p-5'>
                 <div className='row'>
                     <div className='col-md-6'>
@@ -50,7 +64,7 @@ const Product_Details = () => {
                             <button className='btn btn-danger'>Remove Product</button>
                         </>
                         :
-                        <button className='btn btn-warning'>Add to Cart</button>
+                        <button className='btn btn-warning' onClick={addToCart} >Add to Cart</button>
                         }
                     </div>
                 </div>

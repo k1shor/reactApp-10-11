@@ -24,7 +24,9 @@ import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 import Product_Details from './Components/product/Product_Details';
 import Deals from './Pages/Deals';
+// import Deals from './Pages/Deals_manas';
 import ForgetPassword from './Pages/ForgetPassword';
+// import ResetPassword from './Pages/ResetPassword_manas';
 import ResetPassword from './Pages/ResetPassword';
 
 const MyRoutes = () => {

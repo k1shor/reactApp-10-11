@@ -24,19 +24,24 @@ const Signin = () => {
 // }
 
     const clickSubmit = e => {
-        e.preventDefault()
-        signin({email,password})
-        .then(data=>{
-            if(data.error){
-                setError(data.error)
-            }
-            else{
-                // console.log(data)
-                authenticate(data,()=> setRedirect(true))
-                
-            }
-        })
-        .catch(error=>console.log(error))
+        e.preventDefault(
+
+            
+                    signin({email,password})
+                    .then(data=>{
+            
+                        if(data.error){
+                            setError(data.error)
+                        }
+                        else{
+                            // console.log(data)
+                            authenticate(data,()=> setRedirect(true))
+                            
+                        }
+                    })
+                    .catch(error=>console.log(error))
+        )
+
     }
 
     // to show error
@@ -62,7 +67,7 @@ const Signin = () => {
 
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             {showError()}
             {redirectToPage()}
             <div className='container-sm w-50  mx-auto my-5 shadow-lg p-5'>
