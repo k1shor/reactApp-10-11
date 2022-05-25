@@ -28,6 +28,7 @@ import Deals from './Pages/Deals';
 import ForgetPassword from './Pages/ForgetPassword';
 // import ResetPassword from './Pages/ResetPassword_manas';
 import ResetPassword from './Pages/ResetPassword';
+import Checkout from './Pages/Checkout';
 
 const MyRoutes = () => {
     return (
@@ -65,6 +66,7 @@ const MyRoutes = () => {
                 <Route path='/' element={<PrivateRoute />}>
                     <Route path='/user/profile' element={<UserDashboard />} />
                     <Route path='/cart' element={<Cart />} />
+                    <Route path='/checkout' element={<Checkout/>}/>
 
 
                 </Route>

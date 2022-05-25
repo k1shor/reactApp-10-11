@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "./cartConstants"
+import { ADD_TO_CART, REMOVE_FROM_CART } from "./cartConstants"
 
 
 const cartReducer = (state={cart_items:[]},action) => {
@@ -8,14 +8,25 @@ const cartReducer = (state={cart_items:[]},action) => {
             let itemExists = state.cart_items.find(i=>i.product === item.product)
 
             if(itemExists){
-                // return {...state, cart_items: state.cart_items.map(i=> i.product === item.product? item : i)}
-                return {...state}
+                return {...state, 
+                    cart_items: state.cart_items.map(i=> i.product === item.product? item : i)}
+                // return {...state}
             }
             else{
                 return {
                     ...state, 
                     cart_items: [...state.cart_items, item]}
             }
+
+        case REMOVE_FROM_CART:
+            return {
+                ...state,
+                cart_items: state.cart_items.filter(i=>i.product!=action.payload.product)
+            }
+
+            // i= samsung 2, apple 3, nokia 1
+            // payload - apple 4
+            // 
 
         default:
             return state

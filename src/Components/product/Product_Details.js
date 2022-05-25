@@ -33,7 +33,7 @@ const Product_Details = () => {
 
 
     const addToCart = () => {
-        // console.log(params.id)
+        console.log(product)
         dispatch(addItemsToCart(params.id,1))
         toast.success('Item added to cart')
 
