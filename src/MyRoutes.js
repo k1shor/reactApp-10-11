@@ -29,6 +29,7 @@ import ForgetPassword from './Pages/ForgetPassword';
 // import ResetPassword from './Pages/ResetPassword_manas';
 import ResetPassword from './Pages/ResetPassword';
 import Checkout from './Pages/Checkout';
+import Shipping from './Pages/Shipping';
 
 const MyRoutes = () => {
     return (
@@ -67,6 +68,7 @@ const MyRoutes = () => {
                     <Route path='/user/profile' element={<UserDashboard />} />
                     <Route path='/cart' element={<Cart />} />
                     <Route path='/checkout' element={<Checkout/>}/>
+                    <Route path='/shipping' element = {<Shipping/>}/>
 
 
                 </Route>

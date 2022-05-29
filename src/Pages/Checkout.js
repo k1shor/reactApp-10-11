@@ -2,9 +2,26 @@ import React from 'react'
 import './cart.css'
 import { useSelector } from 'react-redux'
 import Checkout_progress from '../Components/Checkout_progress'
+import { Link } from 'react-router-dom'
 
 const Checkout = () => {
     const { cart_items } = useSelector(state => state.cart)
+
+
+
+    const calculate_item = () => {
+        let quantity_array = cart_items.map(item=> item.quantity)
+        let total_quantity = quantity_array.reduce((acc,cur)=>(acc+cur))
+        return total_quantity
+    }
+
+    const calculate_total_price = () => {
+        let prices = cart_items.map(item=>item.quantity*item.product_price)
+        let total_price = prices.reduce((acc,cur)=>acc+cur)
+        return total_price
+    }
+        
+        
 
     return (
         <>
@@ -52,17 +69,19 @@ const Checkout = () => {
                         <h4>
                             No. of items in Cart:
                             <b>
-
+                                {calculate_item()}
                             </b>
                         </h4>
                         <h4>
                             Total Price:
                             <b>
-
+                                {calculate_total_price()}
                             </b>
                         </h4>
                         <hr className='my-3' />
+                        <Link to='/shipping'>
                         <button className='btn btn-warning'>Proceed to Shipping</button>
+                        </Link>
                     </div>
                 </div>
             </div>
