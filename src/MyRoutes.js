@@ -1,6 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import First from "./Pages/First";
 import Second from "./Pages/Second"
 import App from "./App"
@@ -31,7 +31,22 @@ import ResetPassword from './Pages/ResetPassword';
 import Checkout from './Pages/Checkout';
 import Shipping from './Pages/Shipping';
 
+// payment
+import {Elements} from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+import { API } from './config';
+
 const MyRoutes = () => {
+    const [stripeApiKey, setStripeApiKey] = useState('')
+    useEffect(()=>{
+        async function getStripeApiKey(){
+            const {data} = await axios.get(`${API}/stripeapikey`)
+            setStripeApiKey(data.stripeAPIKey)
+        }
+    })
+
+
     return (
     
         <Router>
@@ -59,9 +74,6 @@ const MyRoutes = () => {
                     <Route path='/admin/categoryupdate/:id' element={<CategoryUpdate/>}/>
                     <Route path='/admin/product/add' element={<Addproduct/>}/>
                     <Route path='/admin/products' element={<Products_in_Admin_page/>}/>
-
-
-
                 </Route>
 
                 <Route path='/' element={<PrivateRoute />}>
@@ -69,6 +81,12 @@ const MyRoutes = () => {
                     <Route path='/cart' element={<Cart />} />
                     <Route path='/checkout' element={<Checkout/>}/>
                     <Route path='/shipping' element = {<Shipping/>}/>
+
+                    {
+                        stripeApiKey && <Elements stripe={loadStripe(stripeApiKey)}>
+                            {/* <Route path='/payment' element={<Payment/>}/> */}
+                        </Elements>
+                    }
 
 
                 </Route>

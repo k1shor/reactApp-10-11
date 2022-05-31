@@ -5,6 +5,7 @@ import AdminSidebar from '../AdminSidebar'
 import Footer from '../Footer'
 import Navbar from '../Navbar'
 import { getAllProducts, getSortedProducts } from './productAPI'
+import { Link } from 'react-router-dom'
 
 const Products_in_Admin_page = () => {
     const [products, setProducts] = useState([])
@@ -90,7 +91,7 @@ const Products_in_Admin_page = () => {
 
                                             </td>
                                             <td>{item.count_In_Stock}</td>
-                                            <td><button className='btn btn-warning'>View Details</button></td>
+                                            <td><Link to = {`/product/details/${item._id}`}><button className='btn btn-warning'>View Details</button></Link></td>
                                         </tr>
                                     })
                                 }
