@@ -36,6 +36,7 @@ import {Elements} from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { API } from './config';
+import Payment from './Pages/Payment';
 
 const MyRoutes = () => {
     const [stripeApiKey, setStripeApiKey] = useState('')
@@ -82,11 +83,11 @@ const MyRoutes = () => {
                     <Route path='/checkout' element={<Checkout/>}/>
                     <Route path='/shipping' element = {<Shipping/>}/>
 
-                    {
-                        stripeApiKey && <Elements stripe={loadStripe(stripeApiKey)}>
-                            {/* <Route path='/payment' element={<Payment/>}/> */}
-                        </Elements>
-                    }
+                    {/* {
+                        stripeApiKey && <Elements stripe={loadStripe(stripeApiKey)}> */}
+                            <Route path='/payment' element={<Payment/>}/>
+                        {/* </Elements>
+                    } */}
 
 
                 </Route>

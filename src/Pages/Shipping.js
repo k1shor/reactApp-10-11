@@ -53,6 +53,7 @@ const Shipping = () => {
     }
 
     const saveShippingInfoHandler = () => {
+        sessionStorage.setItem('orderInfo', JSON.stringify(calculate_total_price()))
         return dispatch(saveShippingInfo(shippingAddress))
     }
 
@@ -117,7 +118,7 @@ const Shipping = () => {
                             </b>
                         </h4>
                         <hr className='my-3' />
-                        <Link to='/shipping'>
+                        <Link to='/payment'>
                             <button className='btn btn-warning'>Proceed to Payment</button>
                         </Link>
                     </div>
