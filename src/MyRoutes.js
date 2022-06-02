@@ -32,22 +32,11 @@ import Checkout from './Pages/Checkout';
 import Shipping from './Pages/Shipping';
 
 // payment
-import {Elements} from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
-import { API } from './config';
-import Payment from './Pages/Payment';
+
+import PaymentElement from './Pages/PaymentElement';
 
 const MyRoutes = () => {
-    const [stripeApiKey, setStripeApiKey] = useState('')
-    useEffect(()=>{
-        async function getStripeApiKey(){
-            const {data} = await axios.get(`${API}/stripeapikey`)
-            setStripeApiKey(data.stripeAPIKey)
-        }
-    })
-
-
+    
     return (
     
         <Router>
@@ -85,9 +74,10 @@ const MyRoutes = () => {
 
                     {/* {
                         stripeApiKey && <Elements stripe={loadStripe(stripeApiKey)}> */}
-                            <Route path='/payment' element={<Payment/>}/>
+                            <Route path='/payment' element={<PaymentElement/>}/>
                         {/* </Elements>
                     } */}
+                    
 
 
                 </Route>
