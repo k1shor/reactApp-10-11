@@ -1,12 +1,31 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Checkout_progress from '../Components/Checkout_progress'
-import { Link } from 'react-router-dom'
-import { CardCvcElement, CardExpiryElement, CardNumberElement } from '@stripe/react-stripe-js'
-import { useElements } from '@stripe/react-stripe-js'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import {isAuthenticated} from '../Components/auth'
+import axios from 'axios'
+import { toast,ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { API } from '../config'
 
 const Payment = () => {
-    let options = {}
+    const {user,token} = isAuthenticated()
+    const stripe = useStripe()
+    const elements = useElements()
+    const navigate =useNavigate()
+
+    let options = {
+        style:{
+            base:{
+                fontSize:'16px'
+            },
+            invalid:{
+                color: '#ff0000'
+            }
+        }
+    }
+
     let orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
     const { cart_items, shipping_info } = useSelector(state => state.cart)
 
@@ -17,8 +36,109 @@ const Payment = () => {
         return total_price
     }
 
+    const order= {
+        orderItems:cart_items,
+        shippingAddress1: shipping_info.shippingAddress1,
+        shippingAddress2: shipping_info.shippingAddress2,
+        city:shipping_info.city,
+        zip:shipping_info.zip,
+        country:shipping_info.country,
+        phone:shipping_info.phone,
+        user: user._id
+    }
+
+    const paymentData = { amount : orderInfo*100    }
+
+    const paymentHandle = async (e) => {
+        e.preventDefault()
+        document.querySelector('#pay_btn').disabled = true //selecting the button, disable
+        let res
+        try{                                               // to attempt payment
+            const config= {                                // to connect with backend
+                headers: {
+                    'Content-Type':"application/json",
+                    // Authorization: "Bearer ${token}"
+                }
+            }
+            // console.log("orderinfo", orderInfo)
+            // console.log("paymentdata",paymentData)
+            res = await axios.post(`${API}/processpayment`,paymentData, config)
+
+            const client_secret = res.data.client_secret
+
+            //  client_secret = await fetch(`${API}/processpayment`,{
+            //     method:"POST",
+            //     headers: {
+            //                 'Content-Type':"application/json",
+            //                 Authorization: "Bearer ${token}"
+            //             },
+            //     body: JSON.stringify(paymentData)
+            // })
+            // .then(res=>res.json())
+            // .then(data=>data.client_secret)
+            // .catch(err=>console.log(err))
+
+
+            if(!stripe || !elements){
+                return
+            }
+            // make payment, 
+
+            // console.log(elements.getElement(CardNumberElement))
+            // console.log(user)
+
+            const result = await stripe.confirmCardPayment(`${client_secret}`,{
+                payment_method: {
+                    card: elements.getElement(CardNumberElement),
+                    billing_details:{
+                        // name: "TEST",
+                        name: user.name,
+                        email: user.email
+                    }
+                }
+
+            })
+            if(result.error){
+                toast.error(result.error.message)
+                document.querySelector('#pay_btn').disabled = false
+                // console.log("payment failed")
+            }
+            else{
+                if(result.paymentIntent.status==='succeeded'){
+                    order.paymentInfo ={
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    }
+                    // dispatchEvent(createOrder(order))
+                    // console.log("payment success")
+                    localStorage.removeItem('cart_items')
+                    // return <Navigate to='/payment_success'/>
+                    // navigate('/')
+                    document.querySelector('#pay_btn').disabled= true;
+                    toast.success('your order have been placed successfully')
+                
+                    setTimeout(() => {
+                        navigate('/')
+                    }, 5000);
+                }
+                else{
+                    toast.error('error while processing')
+                }
+            }
+            
+        }
+        catch(error){
+            toast.error(error.message)
+            document.querySelector('#pay_btn').disabled = false
+        }
+    }
+
+
+
+
     return (
         <>
+        <ToastContainer theme='colored'/>
             <div className='row'>
                 <div className='col-md-9 p-5'>
                     <Checkout_progress confirmOrder Shipping Payment />
@@ -110,7 +230,7 @@ const Payment = () => {
                                     <CardCvcElement type='text' className='form-control' id='card-cvc' options={options}/>
                                 </div>
                         
-                            <button className='btn btn-warning form-control' id='pay_btn'>Pay Now</button>
+                            <button className='btn btn-warning form-control' id='pay_btn' onClick={paymentHandle}>Pay Now</button>
                                             </div>
                 </div>
             </div>
