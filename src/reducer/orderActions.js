@@ -1,33 +1,33 @@
 import axios from 'axios'
 import { API } from '../config'
-import { isAuthenticated } from '../components/auth'
+import { isAuthenticated } from '../Components/auth'
 import {
     CREATE_ORDER_REQUEST,
     CREATE_ORDER_SUCCESS,
     CREATE_ORDER_FAIL,
-    // MY_ORDER_REQUEST,
-    // MY_ORDER_SUCCESS,
-    // MY_ORDER_FAIL,
-    // ORDER_DETAILS_REQUEST,
-    // ORDER_DETAILS_SUCCESS,
-    // ORDER_DETAILS_FAIL,
+    MY_ORDER_REQUEST,
+    MY_ORDER_SUCCESS,
+    MY_ORDER_FAIL,
+    ORDER_DETAILS_REQUEST,
+    ORDER_DETAILS_SUCCESS,
+    ORDER_DETAILS_FAIL,
     CLEAR_ERRORS
-} from '../constants/orderConstants'
-
+} from './orderConstants'
 
 export const createOrder=(order)=> async(dispatch, getState) =>{
     const {token} = isAuthenticated()
     try{
         dispatch({type:CREATE_ORDER_REQUEST})
 
+        console.log(order)
         const config={
             headers:{
                 'Content-Type':'application/json',
                 Authorization: `Bearer ${token}`
             }
-
         }
-        const {data} = await axios.post(`${API}/order/placeorder`,order,config)
+        console.log(order)
+        const {data} = await axios.post(`${API}/postorder`,order, config)
 
         dispatch({
             type:CREATE_ORDER_SUCCESS,
@@ -51,10 +51,10 @@ export const myOrders=()=>async(dispatch)=>{
                 Authorization: `Bearer ${token}`
             }
         }
-        const {data} = await axios.get(`${API}/order/userorder/${user._id}`)
+        // const {data} = await axios.get(`${API}/order/userorder/${user._id}`)
         dispatch({
             type:MY_ORDER_SUCCESS,
-            payload:data
+            // payload:data
         })
     }
     catch(error){
@@ -84,11 +84,11 @@ export const orderDetails=(id)=> async(dispatch) =>{
             }
 
         }
-        const {data} = await axios.post(`${API}/order/orderdetails/${id}`,config)
+        // const {data} = await axios.post(`${API}/order/orderdetails/${id}`,config)
 
         dispatch({
             type:ORDER_DETAILS_SUCCESS,
-            payload:data
+            // payload:data
         })
     }
     catch(error){

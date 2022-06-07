@@ -8,22 +8,24 @@ import {
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
-    CLEAR_ERRORS
-} from '../constants/orderConstants'
+    CLEAR_ERRORS } from './orderConstants'
 
 export const newOrderReducer = (state={}, action)=> {
     switch(action.type){
 
         case CREATE_ORDER_REQUEST:
             return{
+                loading: true,
                 ...state,
             }
         case CREATE_ORDER_SUCCESS:
             return{
+                loading: false,
                 order:action.payload
             }
         case CREATE_ORDER_FAIL:
             return{
+                loading:false,
                 error:action.payload
             }
         case CLEAR_ERRORS:

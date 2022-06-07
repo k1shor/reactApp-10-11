@@ -1,19 +1,21 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Checkout_progress from '../Components/Checkout_progress'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import {isAuthenticated} from '../Components/auth'
 import axios from 'axios'
 import { toast,ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { API } from '../config'
+import {createOrder} from '../reducer/orderActions'
 
 const Payment = () => {
     const {user,token} = isAuthenticated()
     const stripe = useStripe()
     const elements = useElements()
     const navigate =useNavigate()
+    const dispatch = useDispatch()
 
     let options = {
         style:{
@@ -38,12 +40,12 @@ const Payment = () => {
 
     const order= {
         orderItems:cart_items,
-        shippingAddress1: shipping_info.shippingAddress1,
-        shippingAddress2: shipping_info.shippingAddress2,
-        city:shipping_info.city,
-        zip:shipping_info.zip,
-        country:shipping_info.country,
-        phone:shipping_info.phone,
+        shippingAddress: shipping.street1 + "," + shipping.city + ", "+ shipping.country,
+        shippingAddress2: shipping.street2 + "," + shipping.city + ", "+ shipping.country,
+        // city:shipping_info.city,
+        // zip:shipping_info.zip,
+        // country:shipping_info.country,
+        phone:shipping.phone,
         user: user._id
     }
 
@@ -109,7 +111,7 @@ const Payment = () => {
                         id: result.paymentIntent.id,
                         status: result.paymentIntent.status
                     }
-                    // dispatchEvent(createOrder(order))
+                    dispatch(createOrder(order))
                     // console.log("payment success")
                     localStorage.removeItem('cart_items')
                     // return <Navigate to='/payment_success'/>
