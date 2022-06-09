@@ -19,14 +19,14 @@ export const createOrder=(order)=> async(dispatch, getState) =>{
     try{
         dispatch({type:CREATE_ORDER_REQUEST})
 
-        console.log(order)
+        // console.log(order)
         const config={
             headers:{
                 'Content-Type':'application/json',
                 Authorization: `Bearer ${token}`
             }
         }
-        console.log(order)
+        // console.log(order)
         const {data} = await axios.post(`${API}/postorder`,order, config)
 
         dispatch({
@@ -42,19 +42,25 @@ export const createOrder=(order)=> async(dispatch, getState) =>{
     }
 }
 
-export const myOrders=()=>async(dispatch)=>{
+export const myOrders=()=>async(dispatch, getState)=>{
     const {user,token} = isAuthenticated()
+    
     try{
         dispatch({type:MY_ORDER_REQUEST})
-        const config={
-            headers:{
-                Authorization: `Bearer ${token}`
-            }
-        }
-        // const {data} = await axios.get(`${API}/order/userorder/${user._id}`)
+        // const config={
+        //     headers:{
+        //         Authorization: `Bearer ${token}`
+        //     }
+        // }
+        const {data} = await axios.get(`${API}/userorder/${user._id}`)
+        // await fetch(`${API}/userorder/${user._id}`,{
+        //     method:"GET"
+        // })
+
+        console.log(data)
         dispatch({
             type:MY_ORDER_SUCCESS,
-            // payload:data
+            payload:data
         })
     }
     catch(error){
