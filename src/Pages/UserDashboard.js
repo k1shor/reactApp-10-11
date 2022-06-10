@@ -3,9 +3,11 @@ import { isAuthenticated } from '../Components/auth'
 import UserSidebar from '../Components/UserSidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearErrors, myOrders } from '../reducer/orderActions'
-import { toast } from 'react-toastify'
-import axios from 'axios'
-import { API } from '../config'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+
+import {Link} from 'react-router-dom'
 
 const UserDashboard = () => {
   const { user } = isAuthenticated()
@@ -25,6 +27,7 @@ const UserDashboard = () => {
   return (
     <>
       {/* <Navbar /> */}
+      <ToastContainer theme='colored'/>
       <div className='container-fluid custom-row'>
         <div className='row '>
           <div className='col-md-3'>
@@ -34,7 +37,7 @@ const UserDashboard = () => {
             <table className='table'>
               <thead>
                 <tr>
-                  <th>Order ID</th>
+                  <th>No. of Items</th>
                   <th>Details</th>
                   <th>Total Price</th>
                   <th>Status</th>
@@ -43,12 +46,13 @@ const UserDashboard = () => {
               <tbody>
                 {orders.map((item) => {
                   return <tr>
-                    <td>{item._id}</td>
+                    <td>{item.OrderItems.length}</td>
                     <td>
                       {item.OrderItems.map(individual_item => { return individual_item.product.product_name })}
                     </td>
                     <td>Rs. {item.totalPrice}</td>
                     <td>{item.status}</td>
+                    <td><Link to = {`/orderdetails/${item._id}`}>View Details</Link></td>
                   </tr>
                 })}
               </tbody>

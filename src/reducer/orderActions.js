@@ -47,12 +47,13 @@ export const myOrders=()=>async(dispatch, getState)=>{
     
     try{
         dispatch({type:MY_ORDER_REQUEST})
-        // const config={
-        //     headers:{
-        //         Authorization: `Bearer ${token}`
-        //     }
-        // }
-        const {data} = await axios.get(`${API}/userorder/${user._id}`)
+        const config={
+            headers:{
+                "Content-Type":"application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const {data} = await axios.post(`${API}/userorder/${user._id}`)
         // await fetch(`${API}/userorder/${user._id}`,{
         //     method:"GET"
         // })
@@ -80,6 +81,7 @@ export const clearErrors=()=>async(dispatch) =>{
 
 export const orderDetails=(id)=> async(dispatch) =>{
     const {token} = isAuthenticated()
+    console.log(token)
     try{
         dispatch({type:ORDER_DETAILS_REQUEST})
 
@@ -90,11 +92,12 @@ export const orderDetails=(id)=> async(dispatch) =>{
             }
 
         }
-        // const {data} = await axios.post(`${API}/order/orderdetails/${id}`,config)
+        const {data} = await axios.post(`${API}/orderdetail/${id}`,config)
 
+        console.log(data)
         dispatch({
             type:ORDER_DETAILS_SUCCESS,
-            // payload:data
+            payload:data
         })
     }
     catch(error){

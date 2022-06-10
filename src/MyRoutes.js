@@ -35,6 +35,7 @@ import Shipping from './Pages/Shipping';
 
 import PaymentElement from './Pages/PaymentElement';
 import PaymentSuccess from './Pages/PaymentSuccess';
+import OrderDetails from './Pages/OrderDetails';
 
 const MyRoutes = () => {
 
@@ -75,6 +76,7 @@ const MyRoutes = () => {
 
                     <Route path='/payment' element={<PaymentElement />} />
                     <Route path='/paymentsucccess' element={<PaymentSuccess />} />
+                    <Route path='/orderdetails/:order_id' element={<OrderDetails/>}/>
 
 
 
