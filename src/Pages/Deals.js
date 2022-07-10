@@ -6,7 +6,7 @@ import { getFilteredProducts } from '../Components/product/productAPI'
 import Radio from '../Components/Radio'
 
 const Deals = () => {
-  const [sortBy, setSortBy] = useState('CreatedAt')
+  const [sortBy, setSortBy] = useState('product_price')
   const [order, setOrder] = useState(-1)
   const [limit, setLimit] = useState(8)
   const [skip, setSkip] = useState(0)
@@ -34,7 +34,7 @@ const Deals = () => {
       }
     })
     .catch(err=>console.log(err))
-  },[myfilters])
+  },[myfilters, sortBy, order, limit])
 
 
   const handlePrice = index => {
@@ -88,11 +88,29 @@ const loadmore =() => {
   })
   .catch(err=>console.log(err))
 }
+const handleSort = e =>{
+  // e.preventDefault()
+  setSortBy(e.target.value)
+  console.log(sortBy)
+}
+const handleOrder = e => {
+  e.preventDefault()
+  setOrder(e.target.value)
+  console.log(order)
+}
 
 
   return (
     <>
       <div className='container-fluid'>
+        <select onChange={handleSort}>
+          <option value={'product_price'}>Price</option>
+          <option value={'product_name'}>Name</option>
+        </select>
+        <select onChange={handleOrder}>
+          <option value={-1}>Descending</option>
+          <option value={1}>Ascending</option>
+        </select>
         <div className='row'>
           <div className='col-md-3'>
             Categories
